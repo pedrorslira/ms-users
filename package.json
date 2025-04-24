@@ -17,12 +17,14 @@
   "dependencies": {
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "pg": "^8.15.2",
     "typeorm": "^0.3.22"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
     "@types/jest": "^29.5.2",
     "@types/node": "^22.14.1",
