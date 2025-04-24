@@ -5,7 +5,7 @@ import { UserRepository } from '../repositories/user.repository';
 export const createUser = async (data: UserDto) => {
   const user = await UserRepository.create(data);
   if (!user) throw createHttpError(409, 'User already exists', { data });
-  return user
+  return user;
 };
 
 export const findAllUsers = async () => {

@@ -1,5 +1,11 @@
 import { Router } from 'express';
-import { create, findAll, findOne, update, remove } from '../controllers/user.controller';
+import {
+  create,
+  findAll,
+  findOne,
+  update,
+  remove,
+} from '../controllers/user.controller';
 import { validateDto } from '../middlewares/validation.middleware';
 import { UserDto } from '../dtos/user/user.dto';
 

@@ -9,6 +9,10 @@ export class HttpError extends Error {
   }
 }
 
-export function createHttpError(statusCode: number, message: string, additionalData: any = {}) {
+export function createHttpError(
+  statusCode: number,
+  message: string,
+  additionalData: any = {},
+) {
   return new HttpError(statusCode, message, additionalData);
 }

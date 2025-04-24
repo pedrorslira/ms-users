@@ -8,10 +8,10 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3001;
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 app.use('/msusers', routes);
 app.use(errorHandler);
 
@@ -26,5 +26,3 @@ AppDataSource.initialize()
   .catch((err) => {
     console.error('Error connecting to database', err);
   });
-
-

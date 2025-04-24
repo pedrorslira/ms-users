@@ -13,7 +13,7 @@ export const UserRepository = {
   },
 
   findAll: () => {
-    return repository.find()
+    return repository.find();
   },
 
   create: async (data: Partial<User>) => {
