@@ -1,43 +1,49 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import * as UserService from '../services/user.service';
+import { createHttpError } from '../utils/http-error';
 
-export async function create(req: Request, res: Response): Promise<any> {
+export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const user = await UserService.create(req.body);
-    return res.status(201).json(user);
-  } catch (err: any) {
-    return res.status(500).json({ error: err.message });
+    res.status(201).json(user);
+  } catch (err) {
+    next(err);
   }
 }
 
-export const findAll = async (_req: Request, res: Response): Promise<any> => {
-  const users = await UserService.findAll();
-  return res.json(users);
-};
+export async function findAll(_req: Request, res: Response, next: NextFunction): Promise<void> {
+  try {
+    const users = await UserService.findAll();
+    res.json(users);
+  } catch (err) {
+    next(err);
+  }
+}
 
-export async function findOne(req: Request, res: Response): Promise<any> {
+export async function findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const user = await UserService.findOne(Number(req.params.id));
-    return res.json(user);
-  } catch (err: any) {
-    return res.status(404).json({ error: err.message });
+    if (!user) throw createHttpError(404, 'User not found');
+    res.json(user);
+  } catch (err) {
+    next(err);
   }
 }
 
-export async function update(req: Request, res: Response): Promise<any> {
+export async function update(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const updatedUser = await UserService.update(Number(req.params.id), req.body);
-    return res.json(updatedUser);
-  } catch (err: any) {
-    return res.status(400).json({ error: err.message });
+    res.json(updatedUser);
+  } catch (err) {
+    next(err);
   }
 }
 
-export async function remove(req: Request, res: Response): Promise<any> {
+export async function remove(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     await UserService.remove(Number(req.params.id));
-    return res.status(204).send();
-  } catch (err: any) {
-    return res.status(404).json({ error: err.message });
+    res.status(204).send();
+  } catch (err) {
+    next(err);
   }
 }

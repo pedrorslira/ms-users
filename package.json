@@ -2,9 +2,9 @@
   "name": "ms-users",
   "version": "1.0.0",
   "description": "microservice with the function of managing user CRUD",
-  "main": "src/index.ts",
+  "main": "src/main.ts",
   "scripts": {
-    "start": "npx ts-node src/index.ts",
+    "start": "npx ts-node src/main.ts",
     "lint": "standard",
     "lint:fix": "npm run lint -- --fix",
     "lint:staged": "lint-staged",

@@ -1,11 +1,10 @@
 import { AppDataSource } from '../config/data-source';
 import { User } from '../entities/user.entity';
-import { CreateUserDto } from '../dtos/create-user.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
+import { UserDto } from '../dtos/user/user.dto';
 
 const userRepository = AppDataSource.getRepository(User);
 
-export const create = async (data: CreateUserDto) => {
+export const create = async (data: UserDto) => {
   const user = userRepository.create(data);
   return await userRepository.save(user);
 };
@@ -16,11 +15,10 @@ export const findAll = async () => {
 
 export const findOne = async (id: number) => {
   const user = await userRepository.findOneBy({ id });
-  if (!user) throw new Error('User not found');
   return user;
 };
 
-export const update = async (id: number, data: UpdateUserDto) => {
+export const update = async (id: number, data: UserDto) => {
   const user = await findOne(id); 
   Object.assign(user, data);
   return await userRepository.save(user);
