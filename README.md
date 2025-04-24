@@ -1,4 +1,4 @@
-# MS-BSS-BUYFLOW
+# MS-USERS
 ![Generic badge](https://img.shields.io/badge/maintainer-pedrorslira-purple.svg)
 ![Generic badge](https://img.shields.io/badge/version-1.0.0-orange.svg)
 ![Generic badge](https://img.shields.io/badge/NodeJS-20x-green.svg)
