@@ -1,34 +1,33 @@
-import { AppDataSource } from '../config/data-source';
-import { User } from '../entities/user.entity';
 import { UserDto } from '../dtos/user/user.dto';
 import { createHttpError } from '../utils/http-error';
+import { UserRepository } from '../repositories/user.repository';
 
-const userRepository = AppDataSource.getRepository(User);
-
-export const create = async (data: UserDto) => {
-  const user = userRepository.create(data);
-  return await userRepository.save(user);
+export const createUser = async (data: UserDto) => {
+  const user = await UserRepository.create(data);
+  if (!user) throw createHttpError(409, 'User already exists', { data });
+  return user
 };
 
-export const findAll = async () => {
-  return await userRepository.find();
+export const findAllUsers = async () => {
+  return await UserRepository.findAll();
 };
 
-export const findOne = async (id: number) => {
-  const user = await userRepository.findOneBy({ id });
+export const findUserById = async (id: number) => {
+  const user = await UserRepository.findById(id);
   if (!user) throw createHttpError(404, 'User not found', { id });
   return user;
 };
 
-export const update = async (id: number, data: UserDto) => {
-  const user = await findOne(id);
+export const updateUser = async (id: number, data: UserDto) => {
+  const user = await findUserById(id);
   if (!user) throw createHttpError(404, 'User not found', { id });
-  Object.assign(user, data);
-  return await userRepository.save(user);
+  const updatedUser = await UserRepository.update(id, data);
+  if (!updatedUser) throw createHttpError(409, 'User already exists', { data });
+  return updatedUser;
 };
 
-export const remove = async (id: number) => {
-  const user = await findOne(id);
+export const removeUser = async (id: number) => {
+  const user = await findUserById(id);
   if (!user) throw createHttpError(404, 'User not found', { id });
-  return await userRepository.remove(user);
+  return await UserRepository.remove(id);
 };

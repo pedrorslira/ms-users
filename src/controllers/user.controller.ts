@@ -3,7 +3,7 @@ import * as UserService from '../services/user.service';
 
 export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const user = await UserService.create(req.body);
+    const user = await UserService.createUser(req.body);
     res.status(201).json(user);
   } catch (err) {
     next(err);
@@ -12,7 +12,7 @@ export async function create(req: Request, res: Response, next: NextFunction): P
 
 export async function findAll(_req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const users = await UserService.findAll();
+    const users = await UserService.findAllUsers();
     res.json(users);
   } catch (err) {
     next(err);
@@ -21,7 +21,7 @@ export async function findAll(_req: Request, res: Response, next: NextFunction):
 
 export async function findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const user = await UserService.findOne(Number(req.params.id));
+    const user = await UserService.findUserById(Number(req.params.id));
     res.json(user);
   } catch (err) {
     next(err);
@@ -30,7 +30,7 @@ export async function findOne(req: Request, res: Response, next: NextFunction): 
 
 export async function update(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    const updatedUser = await UserService.update(Number(req.params.id), req.body);
+    const updatedUser = await UserService.updateUser(Number(req.params.id), req.body);
     res.json(updatedUser);
   } catch (err) {
     next(err);
@@ -39,7 +39,7 @@ export async function update(req: Request, res: Response, next: NextFunction): P
 
 export async function remove(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
-    await UserService.remove(Number(req.params.id));
+    await UserService.removeUser(Number(req.params.id));
     res.status(204).send();
   } catch (err) {
     next(err);
