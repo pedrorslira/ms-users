@@ -12,10 +12,6 @@ export const findById = (id: number) => {
   return repository.findOneBy({ id });
 };
 
-export const findByEmail = (email: string) => {
-  return repository.findOneBy({ email });
-};
-
 export const update = async (id: number, data: Partial<User>) => {
   await repository.update(id, data);
   return findById(id);
