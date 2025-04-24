@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
 import * as UserService from '../services/user.service';
-import { createHttpError } from '../utils/http-error';
 
 export async function create(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
@@ -23,7 +22,6 @@ export async function findAll(_req: Request, res: Response, next: NextFunction):
 export async function findOne(req: Request, res: Response, next: NextFunction): Promise<void> {
   try {
     const user = await UserService.findOne(Number(req.params.id));
-    if (!user) throw createHttpError(404, 'User not found');
     res.json(user);
   } catch (err) {
     next(err);
